@@ -1,0 +1,57 @@
+# Diretórios do Visual Studio
+.vscode/
+.vscode/*
+
+# Arquivos de Build do Visual Studio
+*.user
+*.suo
+*.sln.docstates
+*.cache
+*.csproj.user
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.dll
+*.exe
+*.log
+*.obj/
+*.bin/
+*.pdb
+
+# Diretórios do Visual Studio Code
+.vscode/
+
+# Diretórios de Build do .NET
+bin/
+obj/
+build/
+
+# Pacotes NuGet
+packages/
+*.nupkg
+*.snupkg
+
+# Configurações de Usuário do Visual Studio
+.vscode/*
+*.vs/
+
+# Configurações de Depuração Local
+launchSettings.json
+
+# Arquivos do Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Configurações de Ambiente
+.env
+*.env
+
+# Arquivos do Entity Framework Migrations
+Migrations/
+
+# Diretório de Publicação
+publish/
+wwwroot/
