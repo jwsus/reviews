@@ -11,5 +11,6 @@ namespace CourseReviewAPI.Interfaces
         Task<bool> CourseExists(Guid courseId);
         Task UpdateCourseAsync(Guid courseId, CourseUpdateDTO updateDto);
         Task<CourseDto?> GetCourseById(Guid courseId);
+        Task<PagedResult<CourseWithReviewsDTO>> GetCoursesWithReviews(int pageNumber, int pageSize);
     }
 }

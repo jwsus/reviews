@@ -86,5 +86,46 @@ namespace CourseReviewAPI.Repositories
             await _context.SaveChangesAsync();
         }
 
-    }
+        public async Task<PagedResult<CourseWithReviewsDTO>> GetCoursesWithReviews(int pageNumber, int pageSize)
+        {
+            var courseWithReviewsDTO = await _context.Courses
+                .Where(c => !c.IsDeleted) 
+                .Include(c => c.Reviews) 
+                .ThenInclude(r => r.Student)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .Select(c => new CourseWithReviewsDTO
+                {
+                    CourseId = c.Id,
+                    CourseName = c.Name,
+                    CourseDescription = c.Description,
+                    Reviews = c.Reviews
+                    .Select(r => new ReviewDTO
+                    {
+                        ReviewId = r.Id,
+                        StudentId = r.StudentId,
+                        StudentName = r.Student.Name,
+                        Stars = r.Stars,
+                        Comment = r.Comment,
+                        CreatedAt = r.CreatedAt
+                    }).ToList()
+                })
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+
+            var totalRecords = await _context.Courses
+                .Where(c => !c.IsDeleted)
+                .CountAsync();
+
+            return new PagedResult<CourseWithReviewsDTO>
+            {
+                TotalCount = totalRecords,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                Items = courseWithReviewsDTO
+            };
+        }
+  }
 }

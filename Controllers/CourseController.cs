@@ -77,5 +77,18 @@ namespace CourseReviewAPI.Controllers
                 return StatusCode(500, "An error occurred while updating the course.");
             }
         }
+
+        [HttpGet("courses-with-reviews")]
+        public async Task<IActionResult> GetCoursesWithReviews([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            var coursesWithReviews = await _courseService.GetCoursesWithReviews(pageNumber, pageSize);
+
+            if (coursesWithReviews == null || !coursesWithReviews.Items.Any())
+            {
+                return NotFound("No courses found with reviews.");
+            }
+
+            return Ok(coursesWithReviews);
+        }
     }
 }

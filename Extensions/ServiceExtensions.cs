@@ -16,6 +16,7 @@ namespace CourseReviewAPI.Extensions
 
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IReviewService, ReviewService>();
 
             /* End Zone: Services configuration */
 
@@ -24,6 +25,7 @@ namespace CourseReviewAPI.Extensions
 
             services.AddScoped<ICourseRepository, CourseRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
 
             /* End Zone: Repository configuration */
         }

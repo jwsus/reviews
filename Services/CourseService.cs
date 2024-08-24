@@ -74,5 +74,11 @@ namespace CourseReviewAPI.Services
 
             return courseDto;
         }
-    }
+
+        public async Task<PagedResult<CourseWithReviewsDTO>> GetCoursesWithReviews(int pageNumber, int pageSize)
+        {
+            var coursesWithReviews = await _courseRepository.GetCoursesWithReviews(pageNumber,  pageSize);
+            return coursesWithReviews;
+        }
+  }
 }
