@@ -5,7 +5,9 @@ namespace CourseReviewAPI.Interfaces
 {
     public interface ICourseService
     {
-        Task<Course> CreateCourseAsync(Course course);
-        // Outros métodos como Update, Delete, Get etc.
+        Task<CourseDto> CreateCourse(CourseCreateDto  course);
+        Task SoftDeleteCourse(Guid courseId);
+        Task UpdateCourseAsync(Guid courseId, CourseUpdateDTO courseUpdateDto);
+        Task<CourseDto> GetCourseByIdAsync(Guid courseId);
     }
 }

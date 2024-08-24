@@ -17,30 +17,65 @@ namespace CourseReviewAPI.Controllers
             _courseService = courseService;
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCourseById(Guid id)
+        {
+            try
+            {
+              var courseDto = await _courseService.GetCourseByIdAsync(id);
+
+              return Ok(courseDto);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+
         [HttpPost]
-        public async Task<IActionResult> CreateCourse([FromBody] Course course)
+        public async Task<IActionResult> CreateCourse([FromBody] CourseCreateDto course)
         {
             if (course == null)
             {
                 return BadRequest();
             }
 
-            var createdCourse = await _courseService.CreateCourseAsync(course);
+            var createdCourse = await _courseService.CreateCourse(course);
             return Ok(createdCourse);
         }
 
-        // Exemplo de rota para buscar curso por ID
-        // [HttpGet("{id}")]
-        // public async Task<IActionResult> GetCourseById(int id)
-        // {
-        //     var course = await _courseService.GetCourseByIdAsync(id);
-        //     if (course == null)
-        //     {
-        //         return NotFound();
-        //     }
-        //     return Ok(course);
-        // }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> SoftDeleteCourse(Guid id)
+        {
+            try
+            {
+                await _courseService.SoftDeleteCourse(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
-        // Outros métodos como Update, Delete etc.
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] CourseUpdateDTO courseUpdateDTO)
+        {
+            if (courseUpdateDTO == null)
+            {
+                return BadRequest("Invalid data.");
+            }
+
+            try
+            {
+                await _courseService.UpdateCourseAsync(id, courseUpdateDTO);
+    
+                return NoContent();  
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An error occurred while updating the course.");
+            }
+        }
     }
 }
