@@ -7,7 +7,7 @@ PostgreSQL
 AutoMapper
 Swagger
 
-### Pré-requisitos
+# Pré-requisitos
 ## Antes de começar, você precisará ter o seguinte instalado em sua máquina:
 
 .NET 8 SDK
