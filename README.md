@@ -59,3 +59,9 @@ dotnet run
 
 URL: http://localhost:5000/swagger
 Caso você tenha alterado a porta padrão no launchSettings.json, ajuste a URL de acordo.
+
+## Pontos de melhoria
+- Adicionar testes unitários
+- Criar sistema de login para alunos/adm
+- Permitir o aluno a iniciar um curso
+- Restringir as avaliações apenas a alunos matriculados
