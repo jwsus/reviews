@@ -5,11 +5,10 @@ namespace CourseReviewAPI.Interfaces
     public interface IReviewRepository : IBaseRepository<Review>
     {
         void Add(Review review);
-        
-        // Task<Student> CreateStudentAsync(Student student);
-        // Task SoftDeleteStudent(Guid studentId);
-        // Task<bool> StudentExists(Guid studentId);
-        // Task UpdateStudentAsync(Guid studentId, StudentCreateDTO updateDto);
-        // Task<StudentDTO?> GetStudentById(Guid studentId);
+        Task<Review> CreateReview(Review review);
+        Task DeleteReview(Guid reviewId);
+        Task<bool> ReviewExists(Guid reviewId);
+        Task UpdateReview(Guid reviewId, ReviewUpdateDTO updateDto);
+        Task<ReviewDTO?> GetReviewById(Guid reviewId);
     }
 }

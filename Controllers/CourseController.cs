@@ -3,6 +3,10 @@ using CourseReviewAPI.Models;
 using CourseReviewAPI.Services;
 using System.Threading.Tasks;
 using CourseReviewAPI.Interfaces;
+using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CourseReviewAPI.Controllers
 {
@@ -18,13 +22,16 @@ namespace CourseReviewAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [SwaggerOperation(Summary = "Get a course by ID", Description = "Retrieves a specific course by its unique ID.")]
+        [SwaggerResponse(200, "Returns the course details")]
+        [SwaggerResponse(404, "If the course is not found")]
         public async Task<IActionResult> GetCourseById(Guid id)
         {
             try
             {
-              var courseDto = await _courseService.GetCourseByIdAsync(id);
+                var courseDto = await _courseService.GetCourseByIdAsync(id);
 
-              return Ok(courseDto);
+                return Ok(courseDto);
             }
             catch (KeyNotFoundException ex)
             {
@@ -33,6 +40,9 @@ namespace CourseReviewAPI.Controllers
         }
 
         [HttpPost]
+        [SwaggerOperation(Summary = "Create a new course", Description = "Creates a new course with the provided details.")]
+        [SwaggerResponse(200, "Returns the created course")]
+        [SwaggerResponse(400, "If the input data is invalid")]
         public async Task<IActionResult> CreateCourse([FromBody] CourseCreateDto course)
         {
             if (course == null)
@@ -45,6 +55,9 @@ namespace CourseReviewAPI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [SwaggerOperation(Summary = "Soft delete a course", Description = "Marks a course as deleted without removing it from the database.")]
+        [SwaggerResponse(204, "Course was soft deleted successfully")]
+        [SwaggerResponse(404, "If the course is not found")]
         public async Task<IActionResult> SoftDeleteCourse(Guid id)
         {
             try
@@ -59,6 +72,10 @@ namespace CourseReviewAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [SwaggerOperation(Summary = "Update a course", Description = "Updates the details of an existing course.")]
+        [SwaggerResponse(204, "Course was updated successfully")]
+        [SwaggerResponse(400, "If the input data is invalid")]
+        [SwaggerResponse(500, "An error occurred while updating the course")]
         public async Task<IActionResult> UpdateCourse(Guid id, [FromBody] CourseUpdateDTO courseUpdateDTO)
         {
             if (courseUpdateDTO == null)
@@ -72,13 +89,16 @@ namespace CourseReviewAPI.Controllers
     
                 return NoContent();  
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(500, "An error occurred while updating the course.");
             }
         }
 
         [HttpGet("courses-with-reviews")]
+        [SwaggerOperation(Summary = "Get courses with reviews", Description = "Retrieves a list of courses along with their reviews, with pagination support.")]
+        [SwaggerResponse(200, "Returns the list of courses with reviews")]
+        [SwaggerResponse(404, "If no courses with reviews are found")]
         public async Task<IActionResult> GetCoursesWithReviews([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
             var coursesWithReviews = await _courseService.GetCoursesWithReviews(pageNumber, pageSize);

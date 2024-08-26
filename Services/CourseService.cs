@@ -1,8 +1,6 @@
 using AutoMapper;
 using CourseReviewAPI.Interfaces;
 using CourseReviewAPI.Models;
-using CourseReviewAPI.Repositories;
-using System.Threading.Tasks;
 
 namespace CourseReviewAPI.Services
 {

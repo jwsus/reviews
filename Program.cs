@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen(c =>
         Description = "API do MeuProjeto",
     });
 
-    // c.EnableAnnotations();
+    c.EnableAnnotations();
 });
 
 var app = builder.Build();
