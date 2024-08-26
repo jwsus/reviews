@@ -9,7 +9,6 @@ Este projeto é uma API para gerenciar Cursos, Estudantes e Avaliações. Os est
 - .NET 8
 - Entity Framework Core
 - PostgreSQL
-- AutoMapper
 - Swagger
 
 ## Pré-requisitos
@@ -26,7 +25,7 @@ Antes de começar, você precisará ter o seguinte instalado em sua máquina:
    Primeiro, crie um banco de dados no PostgreSQL. Use a ferramenta de sua preferência, como `pgAdmin` ou o `psql`.
 
    ```sql
-   CREATE DATABASE coursereviewdb;
+   CREATE DATABASE coursereviewdb; ```
    
 Configurar a String de Conexão:
 
