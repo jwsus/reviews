@@ -25,34 +25,37 @@ Antes de começar, você precisará ter o seguinte instalado em sua máquina:
    Primeiro, crie um banco de dados no PostgreSQL. Use a ferramenta de sua preferência, como `pgAdmin` ou o `psql`.
 
    ```sql
-   CREATE DATABASE coursereviewdb; ```
+   CREATE DATABASE coursereviewdb; 
    
 Configurar a String de Conexão:
 
 No arquivo appsettings.json, substitua DefaultConnection pela sua string de conexão:
-```
-{
+
+``` {
   "ConnectionStrings": {
     "DefaultConnection": "Host=localhost;Database=coursereviewdb;Username=your_username;Password=your_password"
   }
-} ```
+}; 
+```
+
+
 Certifique-se de substituir your_username e your_password pelas credenciais do seu PostgreSQL.
 
 ## Aplicar as Migrações:
 
 No terminal, execute os seguintes comandos para aplicar as migrações e criar as tabelas necessárias no banco de dados:
 
-bash
-Copiar código
+``` 
 dotnet ef database update
-Executando o Projeto
+```
+### Executando o Projeto
 Para executar o projeto, utilize o seguinte comando no terminal:
 
-bash
-Copiar código
+```
 dotnet run
-Acessando o Swagger
-## Após iniciar a API, você pode acessar a documentação interativa do Swagger no seguinte endereço:
+```
+## Acessando o Swagger
+ Após iniciar a API, você pode acessar a documentação interativa do Swagger no seguinte endereço:
 
 URL: http://localhost:5000/swagger
 Caso você tenha alterado a porta padrão no launchSettings.json, ajuste a URL de acordo.
